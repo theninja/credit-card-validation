@@ -19,10 +19,16 @@
     "javascript"
   ],
   "main": "src/card.js",
+  "scripts": {
+    "test": "mocha -R spec tests/check"
+  },
   "licenses": [
     {
       "name": "MIT",
       "url": "http://www.opensource.org/licenses/mit-license.php"
     }
-  ]
+  ],
+  "devDependencies": {
+    "mocha": "1.2.1"
+  }
 }

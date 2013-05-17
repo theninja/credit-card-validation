@@ -4,12 +4,12 @@ This is a micro-library for credit card validation. It checks a card number is v
 
 ## Import
 
-###Browser
+### Browser
 Simply add the script (`<script src="card.min.js"></script>`) either just before the closing body tag or within the head of your page.
 
 	var card = CardValidate('xxxxxxxxxxxxxxxx');
 
-###Node.js
+### Node.js
 
 	var cardvalidate = require('card'),
 		card = cardvalidate('xxxxxxxxxxxxxxxx');
@@ -23,6 +23,10 @@ At the moment the script is purposefully simple and exposes only two public meth
 	// returns true if the card is validated by Luhn algorithm
 	// and matches card requirements or false if not
 	card.isValid();
+
+## Testing
+
+To run tests simply run `npm install` if you haven't already, followed by `npm test`.
 
 ##TODO
 
