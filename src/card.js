@@ -100,3 +100,9 @@ var CardValidate = (function() {
 
 	return Card;
 })();
+
+if(typeof module !== 'undefined' && module.exports) {
+	module.exports = function(num) {
+		return new CardValidate(num);
+	};
+}

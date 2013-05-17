@@ -1,0 +1,28 @@
+{
+  "name": "credit-card-validation",
+  "description": "Credit/debit card validation for browsers and Node.js, uses Luhn algo and pattern matching.",
+  "version": "1.0.0",
+  "author": "Jack Buckland <jack@theninjalab.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/theninja/credit-card-validation"
+  },
+  "bugs": {
+    "url": "https://github.com/theninja/credit-card-validation/issues"
+  },
+  "keywords": [
+    "credit",
+    "card",
+    "validation",
+    "browser",
+    "luhn",
+    "javascript"
+  ],
+  "main": "src/card.js",
+  "licenses": [
+    {
+      "name": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ]
+}
