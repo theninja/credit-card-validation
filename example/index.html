@@ -1,0 +1,180 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Card Verification Example</title>
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="styles.css" />
+
+<script src="../src/card.js"></script>
+<script src="http://fb.me/react-with-addons-0.12.2.js"></script>
+<script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+<script type="text/jsx">
+// A rough example using react.js as this makes input masking pretty easy
+
+var Example = React.createClass({
+	getInitialState: function() {
+		return {
+			valid: null
+		};
+	},
+
+	onUpdate: function(valid){
+		this.setState({valid: valid});
+	},
+
+	render: function() {
+		var classes = React.addons.classSet({
+			'card-check': true,
+			'card-valid': this.state.valid,
+			'card-invalid': this.state.valid === false
+		});
+		return (
+			<div>
+				<h1>Example credit card form</h1>
+				<div className={classes}>
+					<CardInput onUpdate={this.onUpdate}/>
+				</div>
+				<div className="card-example-numbers">
+					Try any of the following:
+					<ul>
+						<li>American Express: 378282246310005</li>
+						<li> Diner's Club: 38520000023237</li>
+						<li> Discover: 6011454931724887</li>
+						<li> JCB: 3566002020360505</li>
+						<li> Maestro: 6763946698976220</li>
+						<li> MasterCard: 5206034443216817</li>
+						<li> UnionPay: 6234253249408910</li>
+						<li> Visa: 4012888888881881</li>
+					</ul>
+				</div>
+				<div className="disclaimer">
+					*This is not a real credit card form, just a lonesome text
+					input without a back-end.<br/>I'd be more than happy to take some
+					money off your hands if you really wanted me to though :P.
+				</div>
+			</div>
+		);
+	}
+});
+
+var CardInput = React.createClass({
+	getInitialState: function() {
+		return {
+			type: 'default'
+		};
+	},
+
+	handleChange: function(e) {
+		var format = this._formatCardNumber(
+				e.target.value,
+				e.target.selectionStart
+			),
+			card = new CardValidate(format.raw);
+
+		this.setState({
+				inputValue: format.input,
+				caretPosition: format.caretPos,
+				type: card.getType()
+			},
+			this._setCaretPosition
+		);
+
+		this.props.onUpdate(format.raw.length == 0 ? null : card.isValid());
+	},
+
+	_setCaretPosition: function() {
+		if(this.state.caret !== null) {
+			this.getDOMNode().setSelectionRange(
+				this.state.caretPosition,
+				this.state.caretPosition
+			);
+		}
+	},
+
+	_removeChar: function(str, idx) {
+		return str.substr(0, idx) + str.substr(idx + 1, str.length)
+	},
+
+	_addChar: function(str, idx, ch) {
+		return str.substr(0, idx + 1) + ch + str.substr(idx + 1, str.length);
+	},
+
+	_formatCardNumber: function(num, caretPos) {
+		var ch,
+			raw,
+			startlength,
+			offset,
+			startCaret = caretPos;
+
+		// loop over input and remove unwanted characters
+		for(var i = num.length - 1; i >= 0; i--) {
+			ch = num.charCodeAt(i);
+
+			// check whether we have a non numeric char
+			if(ch < 48 || ch > 57) {
+
+				num = this._removeChar(num, i);
+				// if it's before the caret position
+				// move the caret one position to the left
+				if(i < caretPos) {
+					caretPos--;
+				}
+			}
+		}
+
+		raw = num;
+		startlength = num.length;
+
+		if(startlength > 4) {
+			// calculate remainder to know where first space sould
+			// be placed from the end
+			offset = startlength % 4;
+
+			// loop over input characters
+			for(var i = startlength - 1; i >= 0; i--) {
+				// see if we should insert a space
+				if((startlength - 1 - offset - i) % 4 == 0) {
+
+					num = this._addChar(num, i, ' ');
+					// if it's before the caret position
+					// move the caret one position to the right
+					if(i + 1 < caretPos) {
+						caretPos++;
+					}
+				}
+			}
+		}
+
+		return {
+			raw: raw,
+			input: num,
+			caretPos: caretPos
+		}
+	},
+
+	componentDidMount: function() {
+		this.getDOMNode().focus();
+	},
+
+	render: function() {
+		var style = {
+			backgroundImage: 'url(img/' + this.state.type + '.png)'
+		};
+		return (
+			<input type="text"
+			       className="card-input"
+			       value={this.state.inputValue}
+			       placeholder="• • • •  • • • •  • • • •  • • • •"
+			       onChange={this.handleChange}
+			       autoComplete="off"
+			       style={style}/>
+		);
+	}
+});
+React.render(<Example/>, document.body);
+</script>
+</head>
+<body>
+</body>
+</html>
