@@ -1,0 +1,102 @@
+@import url(//fonts.googleapis.com/css?family=Ropa+Sans);
+body {
+	font-family: 'Ropa Sans', Helvetica, Arial, sans-serif;
+	background-color: #ededed;
+	margin: 0;
+}
+input::-ms-clear {
+	display: none;
+	height: 0;
+}
+h1 {
+	margin-top: 30px;
+	text-align: center;
+}
+.card-check {
+	position: relative;
+	display: block;
+	width: 380px;
+	margin: 50px auto 40px;
+}
+.card-check::after {
+	position: absolute;
+	top: 0;
+	right: 12px;
+	font-family: 'FontAwesome';
+	pointer-events: none;
+	font-size: 1.75em;
+	line-height: 50px;
+	opacity: 0;
+	content: '\f00d';
+	color: #cd6e6e;
+	transform: scale3d(0.5, 0.5, 1);
+	transition: opacity 0.3s, transform 0.3s;
+}
+.card-valid::after, .card-invalid::after {
+	opacity: 1;
+	transform: scale3d(1, 1, 1);
+}
+.card-valid::after {
+	color: #62b989;
+	content: '\f00c';
+	-webkit-animation: show .3s;
+}
+@-webkit-keyframes show {
+	0% {
+		opacity: 0;
+		transform: scale3d(0.5, 0.5, 1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
+	}
+}
+	.card-input {
+		box-sizing: border-box;
+		border: 3px solid #fff;
+		background-color: #fff;
+		padding: 0 42px 0 60px;
+		height: 50px;
+		width: 380px;
+		border-radius: 6px;
+		transition: border .2s ease-out, background-image .2s ease-in-out;
+		font-size: 1.8em;
+		display: block;
+		font-family: 'Ropa Sans', Helvetica, Arial, sans-serif;
+		background-image: url('img/default.png');
+		background-position: 8px center;
+		background-repeat: no-repeat;
+	}
+	.card-input:focus {
+		outline: none;
+		border: 3px solid #b565a5;
+	}
+.card-example-numbers {
+	position: relative;
+	width: 380px;
+	margin: 50px auto;
+	font-size: 1.2em;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 30px 20px;
+}
+.card-example-numbers ul {
+	margin-bottom: 0;
+}
+.card-example-numbers::before {
+	position: absolute;
+	content: "";
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 20px;
+	top: -40px;
+	left: 20px;
+	border-color: transparent transparent #fff transparent;
+}
+.disclaimer {
+	position: absolute;
+	width: 100%;
+	bottom: 30px;
+	text-align: center;
+}
