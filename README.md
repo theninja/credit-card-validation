@@ -2,6 +2,8 @@
 
 This is a micro-library for credit card validation. It checks a card number is valid and detects the issuing bank (IIN). It currently supports most major card issuers.
 
+Try the example at [http://theninja.github.io/credit-card-validation/](http://theninja.github.io/credit-card-validation/).
+
 ## Import
 
 ### Browser

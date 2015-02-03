@@ -140,8 +140,8 @@ describe('[Valid, unknown credit card types (default)] =>', function() {
 	it(shoulbe + 'Switch/Solo (Paymentech)', function() {
 		validate(card('6331101999990016'), true);
 	});
-	it(shoulbe + 'Australian BankCard', function() {
-		validate(card('5610591081018250'), true);
+	it(shoulbe + 'Maestro old IIN', function() {
+		validate(card('0604243228042426'), true);
 	});
 });
 
@@ -186,7 +186,7 @@ describe('[Invalid, known credit card types] =>', function() {
 		validate(card('5018'), false, 'maestro');
 	});
 	it(shoulbe + 'Maestro #2', function() {
-		validate(card('0604'), false, 'maestro');
+		validate(card('5038'), false, 'maestro');
 	});
 
 	// MasterCard

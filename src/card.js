@@ -29,11 +29,11 @@ var CardValidate = (function() {
 				size: [16]
 			},
 			'jcb': {
-				prefix: /^(35|1800|2131)/,
+				prefix: /^35(2[89]|[3-8][0-9])/,
 				size: [15, 16]
 			},
 			'maestro': {
-				prefix: /^(50(18|20|38)|58|6(304|7)|0604)/,
+				prefix: /^(50(18|2|3)|5[68]|6(304|7))/,
 				size: [12, 19]
 			},
 			'mastercard': {
